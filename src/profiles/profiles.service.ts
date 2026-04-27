@@ -61,7 +61,9 @@ export class ProfilesService {
       (profile) => profile.id === id,
     );
 
-    this.profiles.splice(deleteAtIndex, 1);
+    if (deleteAtIndex > -1) {
+      this.profiles.splice(deleteAtIndex, 1);
+    }
 
     return;
   }

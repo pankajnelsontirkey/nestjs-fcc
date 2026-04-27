@@ -13,19 +13,22 @@ import {
 
 import { CreateProfileDto } from './dto/create-profile.dto';
 import { UpdateProfileDto } from './dto/update-profile.dto';
+import { ProfilesService } from './profiles.service';
 
 @Controller('profiles')
 export class ProfilesController {
+  constructor(private profilesService: ProfilesService) {}
+
   // GET /profiles
   @Get()
   fetchAll(@Query('location') location: string) {
-    return [{ location }];
+    return this.profilesService.findAll();
   }
 
   // GET /profiles/:id
   @Get(':id')
   fetchOne(@Param('id') id: string) {
-    return { id };
+    return this.profilesService.findById(id);
   }
 
   // POST /profiles

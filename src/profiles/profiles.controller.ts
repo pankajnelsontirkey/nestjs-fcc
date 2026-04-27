@@ -42,16 +42,14 @@ export class ProfilesController {
   update(
     @Param('id') id: string,
     @Body() updateProfileDto: UpdateProfileDto,
-  ): UpdateProfileDto | { id: string } {
-    return {
-      id,
-      name: updateProfileDto.name,
-      description: updateProfileDto.description,
-    };
+  ): UpdateProfileDto | { id: string } | {} {
+    return this.profilesService.update(id, updateProfileDto);
   }
 
   // DELETE /profiles/:id
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  remove(@Param('id') id: string) {}
+  remove(@Param('id') id: string) {
+    this.profilesService.remove(id);
+  }
 }

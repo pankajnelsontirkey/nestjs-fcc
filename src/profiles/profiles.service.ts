@@ -34,7 +34,7 @@ export class ProfilesService {
     const profileFound = this.profiles.find((profile) => profile.id === id);
 
     if (!profileFound) {
-      throw new NotFoundException(`Profile with id: '${id}' not found!`);
+      throw new Error(`Profile with id: '${id}' not found!`);
     }
 
     return profileFound;

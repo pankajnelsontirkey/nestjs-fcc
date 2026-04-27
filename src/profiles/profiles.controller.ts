@@ -30,9 +30,16 @@ export class ProfilesController {
   // GET /profiles/:id
   @Get(':id')
   findById(@Param('id') id: string) {
-    return this.profilesService.findById(id); // Exception handled at service.
-    // throw new HttpException('Profile Not Found', HttpStatus.NOT_FOUND);
-    // throw new NotFoundException('Profile not found!');
+    try {
+      return this.profilesService.findById(id);
+    } catch (error) {
+      /* handle specific error thrown from the service layer
+        if(error instanceof DatabaseException){
+          throw NotFoundException()
+        }
+      */
+      throw new NotFoundException(error.message);
+    }
   }
 
   // POST /profiles

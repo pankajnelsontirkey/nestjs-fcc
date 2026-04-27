@@ -4,7 +4,9 @@ import {
   Delete,
   Get,
   HttpCode,
+  HttpException,
   HttpStatus,
+  NotFoundException,
   Param,
   Post,
   Put,
@@ -28,7 +30,9 @@ export class ProfilesController {
   // GET /profiles/:id
   @Get(':id')
   findById(@Param('id') id: string) {
-    return this.profilesService.findById(id);
+    return this.profilesService.findById(id); // Exception handled at service.
+    // throw new HttpException('Profile Not Found', HttpStatus.NOT_FOUND);
+    // throw new NotFoundException('Profile not found!');
   }
 
   // POST /profiles
@@ -50,6 +54,6 @@ export class ProfilesController {
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   remove(@Param('id') id: string) {
-    this.profilesService.remove(id);
+    return this.profilesService.remove(id);
   }
 }

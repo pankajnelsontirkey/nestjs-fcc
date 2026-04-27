@@ -21,23 +21,20 @@ export class ProfilesController {
 
   // GET /profiles
   @Get()
-  fetchAll(@Query('location') location: string) {
+  findAll(@Query('location') location: string) {
     return this.profilesService.findAll();
   }
 
   // GET /profiles/:id
   @Get(':id')
-  fetchOne(@Param('id') id: string) {
+  findById(@Param('id') id: string) {
     return this.profilesService.findById(id);
   }
 
   // POST /profiles
   @Post()
   create(@Body() createProfileDto: CreateProfileDto): CreateProfileDto {
-    return {
-      name: createProfileDto.name,
-      description: createProfileDto.description,
-    };
+    return this.profilesService.create(createProfileDto);
   }
 
   // PUT /profiles/:id
